@@ -163,7 +163,7 @@ class _SignInViewState extends State<SignInView> {
                               email: txtEmail.text, password: txtPassword.text)
                           .then(
                             (value) => {
-                              ScaffoldMessenger.of(context)
+                               ScaffoldMessenger.of(context)
                                   .showSnackBar(snackBar),
                               Navigator.pushReplacement(
                                 context,
