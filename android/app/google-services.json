@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "72381651412",
+    "project_id": "flutter-1bb3f",
+    "storage_bucket": "flutter-1bb3f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72381651412:android:1841ffa1b31b0dde0e1e41",
+        "android_client_info": {
+          "package_name": "com.codeforany.book_grocer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUrv2xMTL7F_5FQ8J5qMzXYhEkkgNWu_g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
