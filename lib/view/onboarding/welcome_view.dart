@@ -47,11 +47,10 @@ class _WelcomeViewState extends State<WelcomeView> {
               RoundButton(
                 title: "Sign in",
                 onPressed: () {
-                   Navigator.push(
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignInView ()));
-
+                          builder: (context) => const SignInView()));
                 },
               ),
               const SizedBox(
@@ -60,9 +59,9 @@ class _WelcomeViewState extends State<WelcomeView> {
               RoundButton(
                 title: "Sign up",
                 onPressed: () {
-
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const SignUpView() ));
-
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const SignUpView()),
+                  );
                 },
               ),
             ],

@@ -98,23 +98,22 @@ class _OnboardingViewState extends State<OnboardingView> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15 ),
+                padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     TextButton(
                         onPressed: () {
-
-                            Navigator.push(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => const WelcomeView()));
-
                         },
                         child: Text(
                           "Skip",
                           style: TextStyle(
-                              color: TColor.primary, fontSize: 17,
+                              color: TColor.primary,
+                              fontSize: 17,
                               fontWeight: FontWeight.w700),
                         )),
                     Row(
@@ -122,7 +121,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: pageArr.map((pObj) {
                         var index = pageArr.indexOf(pObj);
-              
+
                         return Container(
                           margin: const EdgeInsets.symmetric(horizontal: 4),
                           width: 15,
@@ -135,22 +134,24 @@ class _OnboardingViewState extends State<OnboardingView> {
                         );
                       }).toList(),
                     ),
-              
                     TextButton(
                         onPressed: () {
-
-                            if(page < 2) {
-                              page = page + 1;
-                              controller?.jumpToPage(page);
-                            }else{
-                                Navigator.push(context, MaterialPageRoute(builder: ( context
-                                  ) => const WelcomeView()  ));
-                            }
+                          if (page < 2) {
+                            page = page + 1;
+                            controller?.jumpToPage(page);
+                          } else {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const WelcomeView()));
+                          }
                         },
                         child: Text(
                           "Next",
                           style: TextStyle(
-                              color: TColor.primary, fontSize: 17, fontWeight: FontWeight.w700),
+                              color: TColor.primary,
+                              fontSize: 17,
+                              fontWeight: FontWeight.w700),
                         )),
                   ],
                 ),

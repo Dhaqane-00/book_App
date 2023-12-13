@@ -57,13 +57,10 @@ class _HelpUsViewState extends State<HelpUsView> {
               const SizedBox(
                 height: 15,
               ),
-              
               const Text("Chanch Click"),
-              
               const SizedBox(
                 height: 15,
               ),
-
               Container(
                 height: 50,
                 padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -113,7 +110,10 @@ class _HelpUsViewState extends State<HelpUsView> {
                 children: [
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context,  MaterialPageRoute(builder: (context) => const MainTabView() ) );
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const MainTabView()));
                     },
                     child: Text(
                       "Skip",

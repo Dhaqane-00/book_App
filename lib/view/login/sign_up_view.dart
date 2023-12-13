@@ -1,7 +1,6 @@
 import 'package:book_grocer/view/login/help_us_view.dart';
-import 'package:book_grocer/view/onboarding/onboarding_view.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/color_extenstion.dart';
@@ -201,25 +200,36 @@ class _SignUpViewState extends State<SignUpView> {
                 RoundLineButton(
                   title: "Sign Up",
                   onPressed: () {
-                    if (_formKey.currentState?.validate() ?? false) {
-                      FirebaseAuth.instance
-                          .createUserWithEmailAndPassword(
-                              email: txtEmail.text, password: txtPassword.text)
-                          .then((value) => {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(snackBar),
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HelpUsView()),
-                                ),
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const HelpUsView()),
-                                )
-                              })
-                          .onError((error, stackTrace) => {});
+                    try {
+                      if (_formKey.currentState?.validate() ?? false) {
+                        FirebaseAuth.instance
+                            .createUserWithEmailAndPassword(
+                                email: txtEmail.text,
+                                password: txtPassword.text)
+                            .then((value) => {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar),
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const HelpUsView()),
+                                  ),
+                                })
+                            .onError((error, stackTrace) => {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(error.toString()),
+                                    ),
+                                  ),
+                                });
+                      }
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(e.toString()),
+                        ),
+                      );
                     }
                   },
                 )
