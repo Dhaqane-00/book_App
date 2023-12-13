@@ -63,9 +63,25 @@ class _SignUpViewState extends State<SignUpView> {
                 const SizedBox(
                   height: 20,
                 ),
-                RoundTextField(
+                TextFormField(
                   controller: txtFirstName,
-                  hintText: "First & Last Name",
+                  decoration: const InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Colors.greenAccent), //<-- SEE HERE
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    hintText: "First Name",
+                    prefixIcon: Icon(
+                      Icons.person,
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your first name';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -73,9 +89,14 @@ class _SignUpViewState extends State<SignUpView> {
                 TextFormField(
                   controller: txtEmail,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          width: 2, color: Colors.greenAccent), //<-- SEE HERE
+                      borderRadius: BorderRadius.circular(20),
+                    ),
                     hintText: "Email",
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.email,
                     ),
                   ),
@@ -94,20 +115,27 @@ class _SignUpViewState extends State<SignUpView> {
                 const SizedBox(
                   height: 15,
                 ),
-                const SizedBox(
-                  height: 15,
-                ),
-                RoundTextField(
+                TextFormField(
                   controller: txtMobile,
-                  hintText: "Mobile Phone",
                   keyboardType: TextInputType.phone,
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                RoundTextField(
-                  controller: txtCode,
-                  hintText: "Group Special Code (optional)",
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          width: 2, color: Colors.greenAccent), //<-- SEE HERE
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    hintText: "Mobile",
+                    prefixIcon: const Icon(
+                      Icons.phone,
+                    ),
+                  ),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter your email address';
+                    }
+
+                    return null;
+                  },
                 ),
                 const SizedBox(
                   height: 15,
@@ -115,9 +143,14 @@ class _SignUpViewState extends State<SignUpView> {
                 TextFormField(
                   controller: txtPassword,
                   decoration: const InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                          width: 2, color: Colors.greenAccent), //<-- SEE HERE
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
                     hintText: "Password",
                     prefixIcon: Icon(
-                      Icons.password,
+                      Icons.lock,
                     ),
                   ),
                   obscureText: true,
