@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../common/color_extenstion.dart';
 import '../../common_widget/round_button.dart';
-import '../../common_widget/round_textfield.dart';
+
 
 class SignUpView extends StatefulWidget {
   const SignUpView({Key? key}) : super(key: key);
@@ -26,6 +26,8 @@ class _SignUpViewState extends State<SignUpView> {
   bool isStay = false;
 
   final _formKey = GlobalKey<FormState>();
+
+  
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +211,7 @@ class _SignUpViewState extends State<SignUpView> {
                             .then((value) => {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar),
-                                  Navigator.push(
+                                  Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
