@@ -219,7 +219,7 @@ class _SignInViewState extends State<SignInView> {
                               GoogleAuthProvider.credential(
                             accessToken: googleAuth.accessToken,
                             idToken: googleAuth.idToken,
-                          );
+                              );
 
                           final UserCredential authResult =
                               await _auth.signInWithCredential(credential);
