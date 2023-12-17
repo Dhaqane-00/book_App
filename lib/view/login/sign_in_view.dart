@@ -213,7 +213,6 @@ class _SignInViewState extends State<SignInView> {
                             // User canceled Google Sign-In
                             return;
                           }
-
                           final GoogleSignInAuthentication googleAuth =
                               await googleUser.authentication;
                           final AuthCredential credential =
@@ -227,7 +226,6 @@ class _SignInViewState extends State<SignInView> {
                           final User? user = authResult.user;
 
                           if (user != null) {
-                            // ignore: use_build_context_synchronously
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(snackBar);
                             Navigator.pushReplacement(
