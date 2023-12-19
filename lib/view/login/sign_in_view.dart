@@ -167,9 +167,13 @@ class _SignInViewState extends State<SignInView> {
                     ),
                     RoundLineButton(
                       title: "Sign In",
-                      onPressed: () {
+                      onPressed: () async {
+                        showDialog(
+                            context: context,
+                            builder: (context) => const Center(
+                                child: CircularProgressIndicator()));
                         if (_formKey.currentState?.validate() ?? false) {
-                          FirebaseAuth.instance
+                          await FirebaseAuth.instance
                               .signInWithEmailAndPassword(
                                   email: txtEmail.text,
                                   password: txtPassword.text)
@@ -177,6 +181,7 @@ class _SignInViewState extends State<SignInView> {
                                 (value) => {
                                   ScaffoldMessenger.of(context)
                                       .showSnackBar(snackBar),
+                                  Navigator.pop(context),
                                   Navigator.pushReplacement(
                                     context,
                                     MaterialPageRoute(
@@ -186,6 +191,7 @@ class _SignInViewState extends State<SignInView> {
                                 },
                               )
                               .onError((error, stackTrace) => {
+                                    Navigator.pop(context),
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
                                         content: Text(error.toString()),
@@ -219,7 +225,7 @@ class _SignInViewState extends State<SignInView> {
                               GoogleAuthProvider.credential(
                             accessToken: googleAuth.accessToken,
                             idToken: googleAuth.idToken,
-                              );
+                          );
 
                           final UserCredential authResult =
                               await _auth.signInWithCredential(credential);

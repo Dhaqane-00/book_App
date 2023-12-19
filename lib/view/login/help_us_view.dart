@@ -71,7 +71,17 @@ class _HelpUsViewState extends State<HelpUsView> {
                   isExpanded: true,
                   hint: const Text("State"),
                   underline: Container(),
-                  items: ["State1", "State2"].map((name) {
+                  items: [
+                    "Banaadir",
+                    "Hargeysa",
+                    "Awdal",
+                    "Bari",
+                    "Bari",
+                    "Galgaduud",
+                    "Gedo",
+                    "Hiiraan",
+                    "Lower Juba "
+                  ].map((name) {
                     return DropdownMenuItem(
                       value: name,
                       child: Text(name),
