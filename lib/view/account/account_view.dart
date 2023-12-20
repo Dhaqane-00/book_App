@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../common/color_extenstion.dart';
 import '../../common_widget/your_review_row.dart';
@@ -13,6 +17,22 @@ class AccountView extends StatefulWidget {
 
 class _AccountViewState extends State<AccountView> {
   final currentUser = FirebaseAuth.instance.currentUser!;
+
+  String imagePath = ''; // To store the selected image path
+
+  _selectFile(bool imageFrom) async {
+    final picker = ImagePicker();
+    var pickedFile = await picker.pickImage(
+        source: imageFrom ? ImageSource.gallery : ImageSource.camera);
+    if (pickedFile != null) {
+      setState(() {
+        imagePath = pickedFile.path; // Store the selected image path
+      });
+      print(pickedFile.path);
+    } else {
+      print('No image selected.');
+    }
+  }
 
   List purArr = ["assets/img/p1.jpg", "assets/img/p2.jpg", "assets/img/p3.jpg"];
 
@@ -81,11 +101,18 @@ class _AccountViewState extends State<AccountView> {
                   ),
                   ClipRRect(
                       borderRadius: BorderRadius.circular(35),
-                      child: Image.asset(
-                        "assets/img/u1.png",
-                        width: 70,
-                        height: 70,
-                      )),
+                      child: imagePath.isNotEmpty
+                          ? Image.file(
+                              File(imagePath),
+                              width: 70,
+                              height: 70,
+                              fit: BoxFit.cover,
+                            )
+                          : Image.asset(
+                              "assets/img/u1.png",
+                              width: 70,
+                              height: 70,
+                            )),
                   const SizedBox(
                     width: 15,
                   ),
@@ -125,7 +152,42 @@ class _AccountViewState extends State<AccountView> {
                           )
                         ]),
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        showModalBottomSheet(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            context: context,
+                            builder: (context) {
+                              return SizedBox(
+                                height: 120,
+                                child: ListView(
+                                  children: [
+                                    ListTile(
+                                      leading: const Icon(
+                                        CupertinoIcons.photo_on_rectangle,
+                                      ),
+                                      title: const Text('Galery'),
+                                      onTap: () {
+                                        _selectFile(true);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                    ListTile(
+                                      leading: const Icon(
+                                        CupertinoIcons.photo_camera_solid,
+                                      ),
+                                      title: const Text('Camera'),
+                                      onTap: () {
+                                        _selectFile(false);
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ],
+                                ),
+                              );
+                            });
+                      },
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.transparent,
                           shadowColor: Colors.transparent),
@@ -181,6 +243,16 @@ class _AccountViewState extends State<AccountView> {
                         "Reviews",
                         style: TextStyle(color: TColor.subTitle, fontSize: 11),
                       )
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 160,
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      ElevatedButton(
+                          onPressed: () {}, child: const Text("Save"))
                     ],
                   ),
                 ],

@@ -1,4 +1,5 @@
 import 'package:book_grocer/common/color_extenstion.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../common_widget/round_button.dart';
@@ -12,7 +13,6 @@ class ForgotPasswordView extends StatefulWidget {
 }
 
 class _ForgotPasswordViewState extends State<ForgotPasswordView> {
-
   TextEditingController txtEmail = TextEditingController();
 
   @override
@@ -48,19 +48,38 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               const SizedBox(
                 height: 15,
               ),
-           
               RoundTextField(
                 controller: txtEmail,
                 hintText: "Email Address",
               ),
-              
               const SizedBox(
                 height: 25,
               ),
-              
               RoundLineButton(
                 title: "Submit",
-                onPressed: () {},
+                onPressed: () async {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                  try {
+                    await FirebaseAuth.instance
+                        .sendPasswordResetEmail(email: txtEmail.text);
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                      content: Text('password reset link send to your email'),
+                    ));
+                    Navigator.pop(context);
+                  } catch (e) {
+                    Navigator.pop(context);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(e.toString()),
+                    ));
+                  }
+                },
               )
             ],
           ),

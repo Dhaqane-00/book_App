@@ -1,4 +1,7 @@
 import 'package:book_grocer/common/color_extenstion.dart';
+import 'package:book_grocer/view/login/sign_up_view.dart';
+import 'package:book_grocer/view/onboarding/welcome_view.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../account/account_view.dart';
@@ -82,13 +85,15 @@ class _MainTabViewState extends State<MainTabView>
                             : null,
                         child: GestureDetector(
                           onTap: () {
-
-                            if(index == 1) {
-
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const OurBooksView()  ) );
-                                sideMenuScaffoldKey.currentState?.closeEndDrawer();
-
-                            }else if (index == 7) {
+                            if (index == 1) {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const OurBooksView()));
+                              sideMenuScaffoldKey.currentState
+                                  ?.closeEndDrawer();
+                            } else if (index == 7) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -138,9 +143,14 @@ class _MainTabViewState extends State<MainTabView>
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            FirebaseAuth.instance.signOut();
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (e) => const WelcomeView()));
+                          },
                           icon: Icon(
-                            Icons.settings,
+                            Icons.exit_to_app_outlined,
                             color: TColor.subTitle,
                             size: 25,
                           )),
@@ -150,7 +160,7 @@ class _MainTabViewState extends State<MainTabView>
                       TextButton(
                         onPressed: () {},
                         child: Text(
-                          "Terns",
+                          "Terms",
                           style: TextStyle(
                               color: TColor.subTitle,
                               fontSize: 17,
