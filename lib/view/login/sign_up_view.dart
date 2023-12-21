@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import '../../common/color_extenstion.dart';
 import '../../common_widget/round_button.dart';
 
-
 class SignUpView extends StatefulWidget {
   const SignUpView({Key? key}) : super(key: key);
 
@@ -26,8 +25,6 @@ class _SignUpViewState extends State<SignUpView> {
   bool isStay = false;
 
   final _formKey = GlobalKey<FormState>();
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -208,23 +205,29 @@ class _SignUpViewState extends State<SignUpView> {
                             .createUserWithEmailAndPassword(
                                 email: txtEmail.text,
                                 password: txtPassword.text)
-                            .then((value) => {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar),
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const HelpUsView()),
+                            .then(
+                              (value) => {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar),
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HelpUsView(),
                                   ),
-                                })
-                            .onError((error, stackTrace) => {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(
-                                      content: Text(error.toString()),
+                                ),
+                              },
+                            )
+                            .onError(
+                              (error, stackTrace) => {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      error.toString(),
                                     ),
                                   ),
-                                });
+                                ),
+                              },
+                            );
                       }
                     } catch (e) {
                       ScaffoldMessenger.of(context).showSnackBar(

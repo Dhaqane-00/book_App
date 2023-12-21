@@ -85,6 +85,7 @@ class _SignInViewState extends State<SignInView> {
                         ),
                       ),
                       validator: (value) {
+                        Navigator.pop(context);
                         if (value == null || value.isEmpty) {
                           return 'Please enter your email address';
                         }
