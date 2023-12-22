@@ -83,22 +83,24 @@ class Card_wishlist extends StatelessWidget {
                         const SizedBox(
                           width: 10,
                         ),
-                        Text(
-                          price,
-                          style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 17),
+                        Expanded(
+                          child: Text(
+                            price,
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 17),
+                          ),
                         ),
-                        const SizedBox(
-                          width: 80,
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 30,
+                        Expanded(
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shadowColor: Colors.transparent),
+                              child: const Text("Add "),
+                              onPressed: () {},
+                            ),
                           ),
                         )
                       ],
