@@ -94,11 +94,11 @@ class Card_wishlist extends StatelessWidget {
                         ),
                         Expanded(
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.only(right: 10),
                             child: ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   shadowColor: Colors.transparent),
-                              child: const Text("Add "),
+                              child: const Text("Add"),
                               onPressed: () {},
                             ),
                           ),
