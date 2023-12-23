@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.codeforany.book_grocer">
    <application
-        android:label="book_grocer"
+        android:label="World Books"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
