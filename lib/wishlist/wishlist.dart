@@ -1,3 +1,4 @@
+import 'package:book_grocer/Cart/Cart.dart';
 import 'package:book_grocer/wishlist/Card_wishlist.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,16 @@ class _WishlistState extends State<Wishlist> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 10),
-            child: const Icon(Icons.add),
+            child: IconButton(
+              icon: const Icon(Icons.shopping_cart_checkout_sharp),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (e) => const Cart(),
+                  ),
+                );
+              },
+            ),
           )
         ],
       ),
@@ -30,12 +40,12 @@ class _WishlistState extends State<Wishlist> {
             Row(
               children: [
                 Card_wishlist(
-                    ImgUrl: "assets/img/7.jpg",
+                    ImgUrl: "assets/img/2.jpg",
                     name: "War",
                     author: "Demisheles",
                     price: "\$70"),
                 Card_wishlist(
-                    ImgUrl: "assets/img/1.jpg",
+                    ImgUrl: "assets/img/3.jpg",
                     name: "The Dissapearance ",
                     author: "Michael Rosen",
                     price: "\$90"),
@@ -44,12 +54,12 @@ class _WishlistState extends State<Wishlist> {
             Row(
               children: [
                 Card_wishlist(
-                    ImgUrl: "assets/img/2.jpg",
+                    ImgUrl: "assets/img/7.jpg",
                     name: "Fatherhood",
                     author: "Marcus Berkmann",
                     price: "\$60"),
                 Card_wishlist(
-                    ImgUrl: "assets/img/3.jpg",
+                    ImgUrl: "assets/img/6.jpg",
                     name: "The Time Travellers ",
                     author: "Stride Lottie",
                     price: "\$50"),

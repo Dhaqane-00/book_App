@@ -1,3 +1,4 @@
+import 'package:book_grocer/Cart/Cart.dart';
 import 'package:book_grocer/common/color_extenstion.dart';
 import 'package:book_grocer/view/login/sign_up_view.dart';
 import 'package:book_grocer/view/onboarding/welcome_view.dart';
@@ -189,11 +190,11 @@ class _MainTabViewState extends State<MainTabView>
           ),
         ),
       ),
-      body: TabBarView(controller: controller, children: [
-        const HomeView(),
-        const SearchView(),
-        const Wishlist(),
-        Container(),
+      body: TabBarView(controller: controller, children: const [
+        HomeView(),
+        SearchView(),
+        Wishlist(),
+        Cart(),
       ]),
       bottomNavigationBar: BottomAppBar(
         color: TColor.primary,
