@@ -20,7 +20,6 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-
   TextEditingController txtName = TextEditingController();
   TextEditingController txtEmail = TextEditingController();
 
@@ -146,10 +145,9 @@ class _HomeViewState extends State<HomeView> {
                       actions: [
                         IconButton(
                             onPressed: () {
-
-                                sideMenuScaffoldKey.currentState?.openEndDrawer();
-
-                            }, icon: const Icon(Icons.menu))
+                              sideMenuScaffoldKey.currentState?.openEndDrawer();
+                            },
+                            icon: const Icon(Icons.menu))
                       ],
                     ),
                     SizedBox(
@@ -197,8 +195,13 @@ class _HomeViewState extends State<HomeView> {
                             var bObj = bestArr[index] as Map? ?? {};
 
                             return GestureDetector(
-                              onTap: (){
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => BookReadingView(bObj: bObj,) ) );
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => BookReadingView(
+                                              bObj: bObj,
+                                            )));
                               },
                               child: BestSellerCell(
                                 bObj: bObj,
@@ -281,7 +284,6 @@ class _HomeViewState extends State<HomeView> {
                         )
                       ]),
                     ),
-                    
                     Container(
                       width: double.maxFinite,
                       margin: const EdgeInsets.symmetric(
@@ -301,12 +303,10 @@ class _HomeViewState extends State<HomeView> {
                                 fontSize: 12,
                               ),
                             ),
-
-                             const SizedBox(
+                            const SizedBox(
                               height: 15,
                             ),
-
-                             RoundTextField(
+                            RoundTextField(
                               controller: txtName,
                               hintText: "Name",
                             ),
@@ -317,32 +317,29 @@ class _HomeViewState extends State<HomeView> {
                               controller: txtEmail,
                               hintText: "Email Address",
                             ),
-
                             const SizedBox(
                               height: 15,
                             ),
-
-                            Row(mainAxisAlignment: MainAxisAlignment.end,children: [
-                              MiniRoundButton(title: "Sign Up", onPressed: 
-                              (){
-                                 Navigator.push(
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                MiniRoundButton(
+                                  title: "Sign Up",
+                                  onPressed: () {
+                                    Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 const SignUpView()));
-                              }, )
-                            ],)
-
-
+                                  },
+                                )
+                              ],
+                            )
                           ]),
                     ),
-                  
-
-
-                     SizedBox(
+                    SizedBox(
                       height: media.width * 0.1,
                     ),
-
                   ],
                 )
               ],
