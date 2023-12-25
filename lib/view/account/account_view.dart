@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:book_grocer/view/account/addBook.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -245,15 +246,37 @@ class _AccountViewState extends State<AccountView> {
                       )
                     ],
                   ),
-                  const SizedBox(
-                    width: 160,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                          onPressed: () {}, child: const Text("Save"))
-                    ],
+                  Expanded(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: ElevatedButton(
+                            child: const Text("Add Book"),
+                            onPressed: () {
+                              showModalBottomSheet(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return Addbook();
+                                },
+                              );
+                            },
+                          ),
+                        ),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Expanded(
+                          child: ElevatedButton(
+                            onPressed: () {},
+                            child: const Text("Save Profile"),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ],
               ),
