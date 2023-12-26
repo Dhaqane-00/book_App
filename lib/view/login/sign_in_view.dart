@@ -147,10 +147,12 @@ class _SignInViewState extends State<SignInView> {
                         TextButton(
                           onPressed: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ForgotPasswordView()));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    const ForgotPasswordView(),
+                              ),
+                            );
                           },
                           child: Text(
                             "Forgot Your Password?",
