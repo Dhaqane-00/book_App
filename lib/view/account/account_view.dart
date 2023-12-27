@@ -255,12 +255,16 @@ class _AccountViewState extends State<AccountView> {
                             child: const Text("Add Book"),
                             onPressed: () {
                               showModalBottomSheet(
+                                isScrollControlled: true,
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(15.0),
                                 ),
                                 context: context,
                                 builder: (BuildContext context) {
-                                  return Addbook();
+                                  return Padding(
+                                    padding: MediaQuery.of(context).viewInsets,
+                                    child: Addbook(),
+                                  );
                                 },
                               );
                             },

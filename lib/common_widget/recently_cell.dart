@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../common/color_extenstion.dart';
@@ -9,10 +8,9 @@ class RecentlyCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var media = MediaQuery.of(context).size;
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 15),
+        margin: const EdgeInsets.symmetric(horizontal: 15),
         // color: Colors.red,
         width: media.width * 0.32,
         child: Column(
@@ -33,7 +31,7 @@ class RecentlyCell extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
                 child: Image.asset(
-                  iObj["img"].toString(),
+                  iObj["image"].toString(),
                   width: media.width * 0.32,
                   height: media.width * 0.50,
                   fit: BoxFit.cover,

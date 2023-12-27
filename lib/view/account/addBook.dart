@@ -20,7 +20,7 @@ class _AddbookState extends State<Addbook> {
     return Form(
       key: _formKey,
       child: Container(
-        height: 600,
+        height: 500,
         width: 600,
         child: Column(
           children: [
@@ -88,29 +88,6 @@ class _AddbookState extends State<Addbook> {
             SizedBox(
               height: 15,
             ),
-            Padding(
-              padding: EdgeInsets.only(left: 13, right: 13),
-              child: TextFormField(
-                controller: txtDescription,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        width: 2, color: Colors.greenAccent), //<-- SEE HERE
-                    borderRadius: BorderRadius.all(Radius.circular(20)),
-                  ),
-                  hintText: "Enter Book description",
-                  prefixIcon: Icon(
-                    Icons.description_rounded,
-                  ),
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your Book description';
-                  }
-                  return null;
-                },
-              ),
-            ),
             SizedBox(
               height: 15,
             ),
@@ -138,7 +115,7 @@ class _AddbookState extends State<Addbook> {
               ),
             ),
             SizedBox(
-              height: 15,
+              height: 30,
             ),
             Expanded(
               child: Container(
@@ -153,8 +130,7 @@ class _AddbookState extends State<Addbook> {
                         if (_formKey.currentState?.validate() ?? false) {
                           var Data = {
                             "name": txtBook.text,
-                            "Author": txtAuthor.text,
-                            "description": txtDescription.text,
+                            "author": txtAuthor.text,
                             "image": txtimage.text
                           };
                           Api.AddBook(Data);

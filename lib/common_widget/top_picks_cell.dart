@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 import '../common/color_extenstion.dart';
@@ -9,7 +8,6 @@ class TopPicksCell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     var media = MediaQuery.of(context).size;
     return SizedBox(
         // color: Colors.red,
