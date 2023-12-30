@@ -28,13 +28,16 @@ class RecentlyCell extends StatelessWidget {
                         offset: Offset(0, 2),
                         blurRadius: 5)
                   ]),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: Image.asset(
-                  iObj["image"].toString(),
-                  width: media.width * 0.32,
-                  height: media.width * 0.50,
-                  fit: BoxFit.cover,
+              child: Container(
+                
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Image.asset(
+                    iObj["image"].toString(),
+                    width: media.width * 0.32,
+                    height: media.width * 0.50,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
             ),

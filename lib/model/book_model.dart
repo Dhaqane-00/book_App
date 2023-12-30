@@ -1,9 +1,10 @@
 class BookModel {
+  String? id;
   String? name;
   String? author;
   String? image;
 
-  BookModel({this.name, this.author, this.image});
+  BookModel({this.name, this.author, this.image , this.id});
 
   // Convert BookModel to Map
   Map<String, dynamic> toMap() {

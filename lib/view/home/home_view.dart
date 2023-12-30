@@ -3,7 +3,10 @@ import 'dart:math';
 
 import 'package:book_grocer/common/color_extenstion.dart';
 import 'package:book_grocer/model/book_model.dart';
+import 'package:book_grocer/view/account/addBook.dart';
 import 'package:book_grocer/view/book_reading/book_reading_view.dart';
+import 'package:book_grocer/view/main_tab/updatebook.dart';
+import 'package:book_grocer/view/onboarding/onboarding_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -29,8 +32,8 @@ class _HomeViewState extends State<HomeView> {
   Future<List<BookModel>> getbooks() async {
     try {
       books.clear();
-      var response =
-          await http.get(Uri.parse("http://192.168.1.16:3000/books/GetBooks"));
+      var response = await http
+          .get(Uri.parse("http://192.168.191.85:3000/books/GetBooks"));
 
       if (response.statusCode == 200) {
         print(response.body);
@@ -284,36 +287,56 @@ class _HomeViewState extends State<HomeView> {
                         )
                       ]),
                     ),
-                    SizedBox(
-                      height: media.width * 0.7,
-                      child: FutureBuilder<List<BookModel>>(
-                        future: getbooks(),
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return CircularProgressIndicator(); // or a loading indicator
-                          } else if (snapshot.hasError) {
-                            return Text('Error: ${snapshot.error}');
-                          } else if (!snapshot.hasData ||
-                              snapshot.data!.isEmpty) {
-                            return Text('No books available.');
-                          } else {
-                            List<BookModel> books = snapshot.data!;
-                            return ListView.builder(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 15, horizontal: 8),
-                              scrollDirection: Axis.horizontal,
-                              itemCount: books.length,
-                              itemBuilder: (context, index) {
-                                var bObj = books[index];
-                                return RecentlyCell(
-                                  iObj: bObj
-                                      .toMap(), // Assuming iObj in RecentlyCell takes a Map
-                                );
-                              },
-                            );
-                          }
-                        },
+                    GestureDetector(
+                      onTap: () {
+                        {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                            context: context,
+                            builder: (BuildContext context) {
+                              return Padding(
+                                padding: MediaQuery.of(context).viewInsets,
+                                child: UpdateBook(),
+                              );
+                            },
+                          );
+                        }
+                      },
+                      child: SizedBox(
+                        height: media.width * 0.7,
+                        child: FutureBuilder<List<BookModel>>(
+                          future: getbooks(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return CircularProgressIndicator(); // or a loading indicator
+                            } else if (snapshot.hasError) {
+                              return Text('Error: ${snapshot.error}');
+                            } else if (!snapshot.hasData ||
+                                snapshot.data!.isEmpty) {
+                              return Text('No books available.');
+                            } else {
+                              List<BookModel> books = snapshot.data!;
+                              return ListView.builder(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 15, horizontal: 8),
+                                scrollDirection: Axis.horizontal,
+                                itemCount: books.length,
+                                itemBuilder: (context, index) {
+                                  var bObj = books[index];
+                                  return RecentlyCell(
+                                    iObj: bObj.toMap(),
+
+                                    // Assuming iObj in RecentlyCell takes a Map
+                                  );
+                                },
+                              );
+                            }
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(
