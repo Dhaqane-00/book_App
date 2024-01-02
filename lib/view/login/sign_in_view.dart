@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../common_widget/round_button.dart';
 
@@ -57,203 +58,237 @@ class _SignInViewState extends State<SignInView> {
             child: Container(
               padding: const EdgeInsets.all(15),
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Sign In",
-                      style: TextStyle(
-                          color: TColor.text,
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700),
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Sign In",
+                    style: TextStyle(
+                        color: TColor.text,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    controller: txtEmail,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 2, color: Colors.greenAccent), //<-- SEE HERE
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      hintText: "Email",
+                      prefixIcon: Icon(
+                        Icons.email,
+                      ),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email address';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  TextFormField(
+                    controller: txtPassword,
+                    decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                            width: 2, color: Colors.greenAccent), //<-- SEE HERE
+                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                      ),
+                      hintText: "Password",
+                      prefixIcon: Icon(
+                        Icons.lock,
+                      ),
                     ),
-                    TextFormField(
-                      controller: txtEmail,
-                      keyboardType: TextInputType.emailAddress,
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 2,
-                              color: Colors.greenAccent), //<-- SEE HERE
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        hintText: "Email",
-                        prefixIcon: Icon(
-                          Icons.email,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                    obscureText: true,
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          setState(() {
+                            isStay = !isStay;
+                          });
+                        },
+                        icon: Icon(
+                          isStay
+                              ? Icons.check_box
+                              : Icons.check_box_outline_blank,
+                          color: isStay
+                              ? TColor.primary
+                              : TColor.subTitle.withOpacity(0.3),
                         ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email address';
-                        }
-                        return null;
-                      },
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    TextFormField(
-                      controller: txtPassword,
-                      decoration: const InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              width: 2,
-                              color: Colors.greenAccent), //<-- SEE HERE
-                          borderRadius: BorderRadius.all(Radius.circular(20)),
-                        ),
-                        hintText: "Password",
-                        prefixIcon: Icon(
-                          Icons.lock,
+                      Text(
+                        "Stay Logged In",
+                        style: TextStyle(
+                          color: TColor.subTitle.withOpacity(0.3),
+                          fontSize: 15,
                         ),
                       ),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                    ),
-                    const SizedBox(
-                      height: 15,
-                    ),
-                    Row(
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            setState(() {
-                              isStay = !isStay;
-                            });
-                          },
-                          icon: Icon(
-                            isStay
-                                ? Icons.check_box
-                                : Icons.check_box_outline_blank,
-                            color: isStay
-                                ? TColor.primary
-                                : TColor.subTitle.withOpacity(0.3),
-                          ),
-                        ),
-                        Text(
-                          "Stay Logged In",
+                      const Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const ForgotPasswordView(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Forgot Your Password?",
                           style: TextStyle(
                             color: TColor.subTitle.withOpacity(0.3),
                             fontSize: 15,
                           ),
                         ),
-                        const Spacer(),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const ForgotPasswordView(),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            "Forgot Your Password?",
-                            style: TextStyle(
-                              color: TColor.subTitle.withOpacity(0.3),
-                              fontSize: 15,
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    RoundLineButton(
-                      title: "Sign In",
-                      onPressed: () async {
-                        showDialog(
-                            context: context,
-                            builder: (context) => const Center(
-                                child: CircularProgressIndicator()));
-                        if (_formKey.currentState?.validate() ?? false) {
-                          await FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: txtEmail.text,
-                                  password: txtPassword.text)
-                              .then(
-                                (value) => {
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(snackBar),
-                                  Navigator.pop(context),
-                                  Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const MainTabView(),
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 8,
+                  ),
+                  RoundLineButton(
+                    title: "Sign In",
+                    onPressed: () async {
+                      showDialog(
+                          context: context,
+                          builder: (context) =>
+                              const Center(child: CircularProgressIndicator()));
+                      if (_formKey.currentState?.validate() ?? false) {
+                        await FirebaseAuth.instance
+                            .signInWithEmailAndPassword(
+                                email: txtEmail.text,
+                                password: txtPassword.text)
+                            .then(
+                              (value) => {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar),
+                                Navigator.pop(context),
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MainTabView(),
+                                  ),
+                                ),
+                              },
+                            )
+                            .onError(
+                              (error, stackTrace) => {
+                                Navigator.pop(context),
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      error.toString(),
                                     ),
                                   ),
-                                },
-                              )
-                              .onError((error, stackTrace) => {
-                                    Navigator.pop(context),
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(
-                                        content: Text(error.toString()),
-                                      ),
-                                    ),
-                                  });
-                        }
-                      },
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        shape: const CircleBorder(),
-                        backgroundColor: Colors.white,
-                        padding: const EdgeInsets.fromLTRB(80, 0, 80, 0),
-                      ),
-                      onPressed: () async {
-                        try {
-                          final GoogleSignInAccount? googleUser =
-                              await googleSignIn.signIn();
-
-                          if (googleUser == null) {
-                            // User canceled Google Sign-In
-                            return;
-                          }
-                          final GoogleSignInAuthentication googleAuth =
-                              await googleUser.authentication;
-                          final AuthCredential credential =
-                              GoogleAuthProvider.credential(
-                            accessToken: googleAuth.accessToken,
-                            idToken: googleAuth.idToken,
-                          );
-
-                          final UserCredential authResult =
-                              await _auth.signInWithCredential(credential);
-                          final User? user = authResult.user;
-
-                          if (user != null) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(snackBar);
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MainTabView(),
-                              ),
+                                ),
+                              },
                             );
-                          }
-                        } catch (error) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text('Error: $error'),
-                            ),
-                          );
-                        }
-                      },
-                      child: Image.asset("assets/img/Google1.png"),
-                    ),
-                  ]),
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        height: 65,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          color: TColor.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                          onPressed: () async {
+                            try {
+                              final GoogleSignInAccount? googleUser =
+                                  await googleSignIn.signIn();
+
+                              if (googleUser == null) {
+                                // User canceled Google Sign-In
+                                return;
+                              }
+                              final GoogleSignInAuthentication googleAuth =
+                                  await googleUser.authentication;
+                              final AuthCredential credential =
+                                  GoogleAuthProvider.credential(
+                                accessToken: googleAuth.accessToken,
+                                idToken: googleAuth.idToken,
+                              );
+
+                              final UserCredential authResult =
+                                  await _auth.signInWithCredential(credential);
+                              final User? user = authResult.user;
+
+                              if (user != null) {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MainTabView(),
+                                  ),
+                                );
+                              }
+                            } catch (error) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('Error: $error'),
+                                ),
+                              );
+                            }
+                          },
+                          icon: SvgPicture.asset(
+                            "assets/img/google.svg",
+                            width: 50,
+                            height: 50,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Container(
+                        height: 65,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          color: TColor.primary,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.facebook_rounded,
+                            size: 50,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
             ),
           ),
         ));
