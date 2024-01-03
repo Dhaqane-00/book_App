@@ -1,5 +1,4 @@
 import 'package:book_grocer/common/color_extenstion.dart';
-
 import 'package:book_grocer/view/onboarding/onboarding_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';

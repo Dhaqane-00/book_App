@@ -4,7 +4,7 @@ import 'package:book_grocer/model/book_model.dart';
 import 'package:http/http.dart' as http;
 
 class Api {
-  static const BaseUrl = "http://192.168.1.16:3000/books";
+  static const BaseUrl = "http://192.168.172.85:3000/books";
   // Add Book model
   static AddBook(Map bdata) async {
     print(bdata);
@@ -31,7 +31,6 @@ class Api {
 
     try {
       final response = await http.get(url);
-
       if (response.statusCode == 200) {
         var data = jsonDecode(response.body.toString());
 

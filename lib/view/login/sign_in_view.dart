@@ -243,7 +243,7 @@ class _SignInViewState extends State<SignInView> {
                               if (user != null) {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar);
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const MainTabView(),

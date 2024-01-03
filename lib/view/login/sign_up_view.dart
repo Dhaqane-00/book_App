@@ -209,7 +209,7 @@ class _SignUpViewState extends State<SignUpView> {
                               (value) => {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(snackBar),
-                                Navigator.pushReplacement(
+                                Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const HelpUsView(),

@@ -5,7 +5,7 @@ import 'package:book_grocer/common/color_extenstion.dart';
 import 'package:book_grocer/model/book_model.dart';
 import 'package:book_grocer/view/account/addBook.dart';
 import 'package:book_grocer/view/book_reading/book_reading_view.dart';
-import 'package:book_grocer/view/main_tab/updatebook.dart';
+import 'package:book_grocer/view/home/updatebook.dart';
 import 'package:book_grocer/view/onboarding/onboarding_view.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +32,8 @@ class _HomeViewState extends State<HomeView> {
   Future<List<BookModel>> getbooks() async {
     try {
       books.clear();
-      var response = await http
-          .get(Uri.parse("http://192.168.1.16:3000/books/GetBooks"));
+      var response =
+          await http.get(Uri.parse("http://192.168.172.85/books/GetBooks"));
 
       if (response.statusCode == 200) {
         print(response.body);
@@ -71,6 +71,11 @@ class _HomeViewState extends State<HomeView> {
       "name": "The Time Travellers Handbook",
       "author": "Stride Lottie",
       "img": "assets/img/3.jpg"
+    },
+    {
+      "name": "Fatherhood",
+      "author": "by Christopher Wilson",
+      "img": "assets/img/4.jpg"
     }
   ];
 
@@ -207,15 +212,17 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Row(children: [
-                        Text(
-                          "Bestsellers",
-                          style: TextStyle(
-                              color: TColor.text,
-                              fontSize: 22,
-                              fontWeight: FontWeight.w700),
-                        )
-                      ]),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Bestsellers",
+                            style: TextStyle(
+                                color: TColor.text,
+                                fontSize: 22,
+                                fontWeight: FontWeight.w700),
+                          )
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: media.width * 0.9,
@@ -312,7 +319,17 @@ class _HomeViewState extends State<HomeView> {
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
-                              return CircularProgressIndicator(); // or a loading indicator
+                              return Center(
+                                child: CircularProgressIndicator(
+                                  value:
+                                      null, // Set to null for an indeterminate state
+                                  strokeWidth: 5, // Set the stroke width
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.blue), // Set the color
+                                  semanticsLabel:
+                                      'Loading', // Set a label for accessibility
+                                ),
+                              );
                             } else if (snapshot.hasError) {
                               return Text('Error: ${snapshot.error}');
                             } else if (!snapshot.hasData ||
@@ -332,6 +349,7 @@ class _HomeViewState extends State<HomeView> {
 
                                     // Assuming iObj in RecentlyCell takes a Map
                                   );
+                                  setState(() {});
                                 },
                               );
                             }
